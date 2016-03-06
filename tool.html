@@ -1,0 +1,31 @@
+﻿<html>
+<head>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+   <title>Unicode補完計畫</title>
+   <style type="text/css">
+      BODY {font-size: 19px}
+      BIG {font-size: 22px; font-family: 'DFKai-SB'; color: #dFfEf9 }
+      SMALL {font-size: 12px; color: #7f7f7f }
+      A:link    { color: rgb(7,62,155) ; text-decoration: none ; cursor:hand }
+      A:visited { color: rgb(7,62,155) ; text-decoration: none }
+      A:active  { color: rgb(255,100,100) ; text-decoration: underline }
+      A:hover   { color: rgb(255,100,255) ; text-decoration: underline }
+   </style>
+</head>
+<body bgcolor=#FFFFFF>
+<br>
+請注意本站所提供的工具，著作權均屬於本站或授權本站使用的原作者，任何人不得未經許可散佈本軟體。
+<ul>
+<li><b><a href='converter.html'>HTML文件外字相容轉換器</a></b><br>
+這個簡單的JavaScript程式可以幫助您將日文假名、簡體字之類的外字，轉換成&#38;#xxxxx;的形式，供HTML文件之用。<p>
+<li><b><a href='tool/UcFileRenamer.zip'>檔名修改程式</a></b><br>
+<b>平台限制：</b>Windows NT/2000/XP/2003<br>
+這個軟體能修改您硬碟中的檔名。若您在安裝Unicode補完計畫前，曾經使用過櫻花輸入法、font.24之類的日文字型作為檔名，因為這些檔名與Unicode不相容，故您應該修改這些檔名。這個程式能夠幫助您快速修改硬碟中的檔名。<br>
+<font color=red>(特別感謝胡克儀先生提供本程式，本程式已直接捆裝在2.30之後版本的Unicode補完計畫中)</font><p>
+<li><b><a href='tool/code.rb'>以 C_950.NLS 為表的 BIG5 / Unicode 查碼工具 - Ruby 版</a></b><br>
+<b>平台限制：</b><ol><li>系統中要有 c_950.nls，或者將其覆製到此程式同路徑亦可，如兩者皆具會以同目錄的 c_950.nls 為主。</li>
+<li>Ruby 1.9.3 以上版本適用</li></ol>
+這個簡單的 Ruby 程式可以將您指定的 big5 / unicode 字，找出其在 c_950.nls 對應的 unicode / big5 內碼。<br>如果您放的是原生的 c_950.nls，就會查出標準 cp950；如果您放的是補完的 c_950.nls，就會查出補完的對應。</li>
+</ul>
+</body>
+</html>

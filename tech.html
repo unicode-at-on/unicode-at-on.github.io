@@ -1,0 +1,183 @@
+﻿<html>
+<head>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+   <title>Unicode 補完計畫</title>
+   <style type="text/css">
+      BODY {font-size: 15px}
+      TD {font-size: 16px; }
+      BIG {font-size: 22px; font-family: 'DFKai-SB'; color: #dFfEf9 }
+      SMALL {font-size: 12px; color: #7f7f7f }
+      A:link    { color: rgb(7,62,155) ; text-decoration: none ; cursor:hand }
+      A:visited { color: rgb(7,62,155) ; text-decoration: none }
+      A:active  { color: rgb(255,100,100) ; text-decoration: underline }
+      A:hover   { color: rgb(255,100,255) ; text-decoration: underline }
+   </style>
+</head>
+<body bgcolor=#FFFFFF>
+<center>
+<br>
+<table width=95% border=0 cellpadding=2 cellspacing=0>
+<tr><td colspan=2 bgcolor=#6496ed><big>BIG-5 日文？ JIS 日文？ 想要看到日文怎麼那麼複雜？</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>聽說 BBS 上的日文是什麼<b>櫻花輸入法</b>，而日本網頁上的日文則是什麼 <b>JIS 日文</b>還是 <b>Shift-JIS 日文</b>之類的，複雜得半死。
+如果想要正常看到每一種日文的話，別人告訴我不只要下載櫻花輸入法，還要安裝微軟的什麼日文套件，明明看起來都是日文，怎麼那麼複雜啊？<p>
+打 BBS 的時候，只能用櫻花輸入法打日文假名，還要來回切注音好麻煩(泣)。<br>
+<br>
+有些網站告訴我，因為台灣的 BIG-5 碼跟日本的 ShiftJIS 碼是不一樣的，內碼是不一樣的，當然輸入法不一樣也是正常的……<p></td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>可是漢字好像沒問題啊？</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>但很奇怪的是，不是說日文網站是 ShiftJIS 碼，跟 BIG-5 不一樣嗎？
+那為什麼把日本網站的文章複製貼上到 BBS 上後，假名會變成「<b>?</b>」，但是有些漢字卻留下來了!?<p>
+不是說內碼不一樣嗎，那為什麼有些漢字好像沒有問題呢!?<p></td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>Unicode 技術</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>其實，為了解決不同語系之間資訊交流的問題。有一種技術存在，叫做 <b>Unicode</b>。<br>
+<br>
+事實上，<b>Windows NT/2000/XP 的系統核心就是 Unicode</b>。<br>
+<br>
+簡單的說，Unicode 是一個超大的文字庫，他蒐集了世界上所有語言的大部分文字，而收錄在同一個文字庫裡。包括 繁/簡體中文、日文、韓文，以及許多想不到的語文。因為 Windows 2000 使用 Unicode 作為核心，所以<b>理論上</B>，Windows 2000應該可以同時處理世界各國的文字。<p>
+Unicode 裡，無論是英文還是漢字、假名，每個字都是兩個 bytes(位元組)。<br>
+<br>
+而之前的傳統編碼，則是美國制定的標準（稱為 <b>ASCII 碼</b>，定為 ANSI 標準），英文字母每個字只要 1 個 byte 儲存。
+但因 1 個 byte 極限只能表示 256 個字，不敷漢字圈使用，所以中文、日文等文字，還自己在 ASCII 的基礎上，以兩個字元組成方塊字，建立出各自的規範，如台灣的 BIG5 與日本的 JIS 等。
+後文我們將這些所有建立在 ASCII 上的各種漢字圈延伸編碼方式，稱為 <b>ANSI 編碼</b>。<p>
+雖然說 Windows 2000/XP 下，文字是 Unicode，但是從 MS-DOS 時代、甚至 Windows 3.1/95/98/ME 所留下來的大量資料，當時都是使用 ANSI 編碼儲存的。所以，Windows 2000 並不可能真的放棄掉 ANSI 編碼。於是，系統就必須隨時自動處理 Unicode 跟 ANSI 之間的轉換。<p>
+例如說，「一」這個字的 BIG-5 碼是 <b>0xA440</b>，而他的 Unicode 是 <b>U+4E00</b>，當今天網頁被下載的時候，傳進來的雖然是 <b>0xA440</b>，但是系統會自動把他轉成 Unicode 的 <b>U+4E00</b>，所以顯示在 IE 畫面上時，他已經被當作 Unicode 的 <b>U+4E00</b> 顯示了；
+而當我今天留言的時候，從注音輸入法打出來的其實是 Unicode 的 <b>U+4E00</b>，可是按下送出了以後，IE 事實上會判斷網頁的語系，因為是 BIG5 的網頁，所以會把他自動轉換成 <b>0xA440</b> 後才傳送出去。<p>
+總之，使用 Windows 2000/XP 時，系統就樣這樣常常把文字在 Unicode 跟 ANSI 之間轉來轉去。<br>
+因為 Windows 裡有內建 Unicode 與其他每種語系的對照表，所以今天我即使在日本網站用注音輸入法打中文，當按下送出的時候，IE 應該會自動把 Unicode 轉成 ShiftJIS 碼的 ANSI 資料才傳出去。<br>
+<br>
+同理，日文網站的文章複製到 BBS 上時，因為網頁上顯示出來的東西已經是 Unicode 了，所以 Windows 不過是再將 Unicode 轉換成 BIG5，而不是真的能從 ShiftJIS 直接轉 BIG5。<p>
+<center><img src='tech/pic1.gif'></center><br>
+如圖例可知，Windows 2000 的核心是以 Unicode 處理資料，而讀取到不同的內碼時，都會跟 Unicode 之間作轉換。<p></td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>回過頭看 BIG-5 碼與倚天擴充字集</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>早在 20 年前，台灣各電腦廠商聯合制定了 <b>BIG-5 碼</b>，又稱五大碼，專門用來處理中文字碼。<br>
+<br>
+BIG-5 碼的內容有常用字 5,401 個、次常用國字 7,693 個及符號 471 個，共計約 13600 字。而當時極為普遍的倚天中文系統，為了反映使用需求，另外編入了日文平假名、日文片假名、俄文字母、圈號數字、雙線表格、以及七個常用外字 (碁、銹、裏、墻、恒、粧、嫺)，也就是所謂的<b>倚天擴充字集</b>，倚天擴充字集被安置在 BIG-5 碼中原先定義為<b>使用者造字區</b>的位置。<br>
+<br>
+由於倚天中文系統當時在台灣、香港的佔有率幾乎達到 100%，所以倚天擴充字集可以說是成為 BIG-5 碼非正式的標準。<p>
+然而，微軟 Windows 3.1 上市的時候 (※註：Windows 3.1 是第一個有中文版的 Windows。)，很荒謬的，說沒有採用倚天擴充字集，卻採用了雙線表格、以及七個常用外字等部分，但日文平假名、日文片假名、俄文字母、圈號數字等，卻都沒有被採用。<br>
+<br>
+隨著 Windows 95 的來臨，台灣也進入了視窗時代，可是 Windows 下並沒有大家熟悉的日文假名。而且隨著 Windows 一版一版的上升到 XP，甚至 Server 2003 了，還是沒有這個部份。
+<p></td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>越來越難懂了，是否可以簡化一點啊？</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>總之啦，雖然台灣的內碼是 <b>BIG5</b>，日本的內碼是 <b>Shift-JIS</b>，但在 Windows 2000/XP 下，藉由核心的 Unicode 作為橋樑，在<b>一般的情況下</b>，應該資料可以互相共享才對。<p>
+真正的問題在於 <b>BIG5 的缺字</b>。當某個字 ShiftJIS 有，但是 BIG5 沒有時，那個字轉換成 BIG5，就會變成問號。
+例如假名或日本簡體字，就如同上面說的，微軟採用的 BIG5 並沒有包括假名。GB 碼的簡體字也是一樣的情形。<p></td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>慢一拍的 Big5+ 與 Big5e</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>事實上，放眼台灣史上制定交換碼 <small>※1</small> 的歷程，都是各部會在搶功。主計處、標準局、教育部，大家都想插一腳，始終沒生出一個能用的碼。
+但民間業者也急著推出中文系統，就是在這種時空環境下，業者們才緊急討論出 BIG5 編碼，事實上 BIG5 只是業界標準，但在政府單位一直鷸蚌相爭下，BIG5 就此就穩穩坐上台灣業界標準，迄今仍舊不搖了。<p>
+但，BIG5 因為是臨時趕出來的，引發的問題也很多。
+像 BIG5 的缺字問題就積弊已久，除了日文假名外，還有人名常用字等，如<b>堃</b>、<b>煊</b>這些字都沒有收錄 <small>※2</small>，一直以來，都廣為使用者所詬病。<p>
+90 年代，隨著 BIG5 已固定化，中推會終於推動 BIG5 的修改，首先推出了 <b>Big5+</b>，使用了兩萬多碼位，不只相容於 BIG5 與倚天擴充字集，更納入 Unicode 2.0 下所有漢字，與大陸的 GBK 有異曲同工之妙，但推出時間太晚，Windows 95 早已上市，使用了與 BIG5 不同的碼位範圍，微軟似乎無意支援。由於使用到的範圍超過原先 BIG5 定義，亦無法藉由造字安裝的方式，安裝在 Windows 上。<p>
+為了使 Windows 使用者可以使用，中推會又配合 BIG5 的碼位範圍，再推出了憋腳的 <b>Big5e</b>。BIG5 的碼位範圍較小，能收錄的字較少，為了把漢字收進去，只好放棄掉倚天擴充字集的部分，也就是－<b>沒有假名</b>。於是在民間的可接受度可想而知，除了部份政府單位、自然輸入法之外，也沒有多少人願意採用 Big5e，就普及率而言，也算是無疾而終了。<br>
+<br>
+再說目前 Big5e 放進 Windows 系統，是使用<b>使用者造字</b>的方式，無法真正與 Unicode 關聯，這些外字的使用，並不能真的方便。關於這點，是 Unicode 補完計畫的重點所在。
+<small><ol>
+<li>我國規定政府不制定標準內碼，只制定標準交換碼。但實務習慣上，電腦直接通訊時，都是直接傳送資料，所以內碼常會直接採用交換碼。<br>
+<br>
+<li>這些字多半都是俗體字、異體字，BIG5 制定匆促，幾乎是直接拿教育部頒布之《國字常用標準字體表》《國字次常用標準字體表》改出來的，由於這兩表都是教育、標準化用途，當然不收異體字。但是電腦字集為了通用性，其實是應該收錄的，如堃字不收錄，就一直造成問題。
+<ol></small><p>
+</td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>櫻花輸入法是什麼？</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>Roy Hu 先生製作了 Windows 造字檔格式的日文字型，並且自己以通用輸入法編輯工具編寫了一套日文的輸入法，加上了安裝程式後，流傳在網路上。<br>
+<br>
+由於安裝了櫻花輸入法後，便可以在 Windows 環境下瀏覽並輸入日文，所以從 Windows 95 起，就廣受網友的喜愛。<p>
+其他如日文假名輸入法等，都是做一樣的事情。<p>
+<p></td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>中國海字集又是什麼？</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>業界的腳步總是走在政府的前面，從 Windows 還沒出現的倚天中文系統時代起，中國海字集就高收錄了中國、日本簡體字、各種常見外字、方言用字，可解決平常缺字嚴重的問題，故廣受一般用戶喜愛。尤其廣受 DOS 時代的 BBS 用戶愛用。<br>
+<br>
+中國海字集在 DOS 時代聲勢浩大，在 Windows 推出後，也持續推出 Windows 版本，並把微軟捨棄的倚天外字也含入，仍受許多玩家喜愛。但因 Windows 2000 後，造字匯入容易出問題，加上付費軟體漸漸拼不過免費軟體的市場機制使然，在 2002 年後逐漸消失。<p>
+但，中國海字集為台灣提供了最大而最廣為使用的一套外字。比起華康、文鼎各公司都有一套自己的外字，中國海字集是難能走遍全台灣的。
+若說 BIG5 是台灣國字內碼的業界標準，那中國海字集應能在台灣外字內碼的非公認標準當之無愧吧。<p>
+<p></td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>如果當時微軟採用 BIG-5 裡的日文假名就好了 >_<</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>如果微軟當時採用了倚天擴充字集裡的日文假名，那 BIG-5 碼轉換成 Unicode 的時候，BIG-5 裡面的日文假名因為是合法的文字，當然會被轉譯成 Unicode 的日文假名部分。<br>
+<br>
+進一步來說也就可以透過 Unicode 與其他任何的內碼中文假名溝通。<p>
+事實上，大陸的 GB2312 碼，甚至韓國的內碼中，都有日文假名的部分，而且在 Windows 中也未被消去。只有繁體中文的 BIG5 碼，在 Windows 裡，這個部分被刪除了。<br>
+<br>
+所以大陸的網友，他們要顯示日文，並不需要特別安裝什麼外字，甚至日本網站抓下來的日文，可以直接貼在 BBS 上，不會有什麼問題。 (Shift-JIS 碼會被先轉成 Unicode 碼，再正確地轉成 GB 的對應碼。) 對他們來說是很正常的事，在台灣、香港好像是天方夜譚。<p>
+<p></td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>您知道嗎? 其實 Windows 2000/XP 的細明體裡，有假名喔!!</big></td></tr><tr><td width=20>&nbsp;</td>
+<td><img src='tech/pic2.gif' align=right>
+使用 Windows NT/2000/XP 的網友們，你知道你的系統字型「細明體」，甚至新細明體跟標楷體，裡面其實都有日文假名喔。<br>
+<br>
+因為這些 Unicode 架構的 Windows，系統字型也是以 Unicode 的格式製作的，在細明體中，有完整的製作出日文假名、日本漢字、大陸簡體字等部分。<p>
+然而，由於倚天擴充的假名並沒有被承認，我們要使用假名時，還是要以造字檔的方法掛入系統使用的，也就是安裝櫻花輸入法等軟體來使用假名。而這些字對應到 Unicode 上，也是對應在 Unicode 裡使用者造字的位置。<p>
+如右圖，<b>あ</b>字是對應到 Unicode 中使用者造字區的內碼 <b>U+F6F8</b> 處，而不是 Unicode 中<b>あ</b>的位置 <b>U+3042</b>。<p>
+<p></td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>那 Unicode 補完計畫是怎麼處理的?</big></td></tr><tr><td width=20>&nbsp;</td>
+<td><img src='tech/pic3.gif' align=right>
+講到現在，終於到了 Unicode 補完計畫本身了。你會問，講了這麼多，Unicode 補完計畫到底是在做什麼？<p>
+簡單的說，就像右圖，這個套件是用來修改 Windows 裡 BIG5 與 Unicode 之間的對應關係，把 BIG5 的日文假名字碼，對應到 Unicode 的正確日文字碼上，而不是微軟一開始對應到的造字區。<p>
+這種做法，跟以往使用造字檔等方法不同，這樣做等於直接徹底改進當時微軟沒有承認倚天擴充字集裡日文假名的問題。因為直接把這些假名對應上了 Unicode 的日文部分，所以你不用安裝字型，就可以直接使用 Unicode 的日文字型看到假名。<p>
+而且因為他轉成 BIG5 後，還是存在 BIG5 倚天擴充字集的位置，所以你製作的所有文字檔、網頁，或是別人的文字檔、網頁，還是可以沒有問題的交流。<p>
+<p></td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>裝完 Unicode 補完計畫後，有什麼變化呢?</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>
+<ul>
+<li>可以直接從文章從日文網站 Copy 到 BBS、ICQ 等 ANSI 環境下，假名不會變成問號「?」。<br>
+<br>
+或是可以從 ANSI 環境下把日文文章 Copy 到日本網站留言，送出後日本網友看的到。<br>
+<br>
+這應該是非常大的利多，事實上 Unicode 補完計畫推出後的這兩年，BBS 上看到的整篇轉貼日文文件大量增加，或許我們正是幕後黑手(笑)。<br>
+<img src='tech/pic5.gif'><p></li>
+<li>可以直接用 MS IME 在 FTP、BBS、UltraEdit、TMPGEnc 之類的 ANSI 軟體下輸入日文。<small>※1</small><br>
+<br>
+由於目前大部分的共享軟體都還是 ANSI 環境，若您有使用共享軟體的習慣，使用 Unicode 補完計畫，應能使您更方便。<br>
+<img src='tech/pic4.gif'><p></li>
+<li>把系統切到日文模式下，仍然可以正常看到 BBS 等下的日文假名。<p></li>
+</ul><p>
+<small><ol>
+<li>由於 Windows 輸入法的設計問題，要在中文環境下直接用 MS IME 在 BIG5 的 ANSI 軟體輸入日文，必須將 MS IME 註冊成繁體中文輸入法才行。原先日文輸入法的 MS IME 仍可正常並存使用，這點大可不必擔心。本軟體安裝程式會協助您將 MS IME 登記為繁體中文輸入法。
+<ol></small><p>
+</td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>以圖表解釋的話</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>這是 Unicode 補完計畫 2.00 版時的說明圖：<p>
+<center><img src='tech/pic6.gif'></center><p>
+如上圖，一開始 BIG5 日文假名是與 Unicode 的使用者造字區互相對應，而 Unicode 的日文假名區在 BIG5 中沒有適當的對應位置。<br>
+<br>
+而套用本套件後，BIG5 日文假名是與 Unicode 的日文假名區互相對應，而 Unicode 的使用者造字區仍單方向的對應在 BIG5 的日文假名區。<p>
+<p></td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>漢字對應</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>從 1.5 版開始新增加了 Unicode 簡體漢字單方向對應到 BIG5 繁體字的設計，例如說「亀」字對應到「龜」字上，這樣有助於從日文網站把資料複製到 BBS 上等時候使用。<br>
+<br>
+但單向對應容易引起檔名的轉換不正常，經過多方面考量，以及問卷調查的結果，我們正式決定從 2.10 beta 版開始，將漢字外字也採用雙向對應。<p>
+所謂雙向對應，就是跟上述對應假名的情況一樣，直接在 BIG5 中加上這個字，並將他對應到正確的 Unicode 字碼上。<br>
+<br>
+在 BIG5 裡，我們決定以中國海字集的字碼為基礎，並補充大量中國海字集仍有感不足的漢字。現今已收錄所有 Shift-JIS、GB2312 所有而 BIG5 沒有的漢字了，總個數高達堂堂 5000 多字。<p>
+<center><img src='tech/pcman.jpg'></center><p>
+如上圖，現在起，您可在 BBS 使用各種日本國字、日本簡體字、大陸簡體字，只要對方也有安裝本軟體，就能看的到。<small>※1</small><br>
+<br>
+最難能可貴的是，這不是單純的轉碼器，因為當您將日本網站的文章貼上 BBS，再將 BBS 的文章貼回日文網站，文完全不會改變，跟以往使用櫻花輸入法時，還得在網路上找轉碼程式轉換，有極大的差異。<p>
+<small><ol>
+<li>已測試 PCMan、PACKETSiTE、NetTERM、Multi-term、PuTTY 等各種 telnet 軟體（BBS 軟體）均正常。唯 KKman 到 2.14 版為止仍有問題，會顯示出大量亂碼。
+<ol></small><p>
+</td></tr>
+
+<tr><td colspan=2 bgcolor=#6496ed><big>Windows 95/98/ME 的使用者呢？</big></td></tr><tr><td width=20>&nbsp;</td>
+<td>由於 Windows 95/98/ME 的核心是 ANSI，與 Windows 2000/XP/2003 相較下，受限較大，但 Windows 95/98/ME 系統中仍然有 BIG5 與 Unicode 的對照表，所以上述說明，基本上大部分也適用在 Windows 95/98/ME。<p>
+如，日文網頁可以直接 Copy 到 BBS 或記事本上，這是沒有問題的。但由於 MS-IME 95/98 所輸出的是 ShiftJIS 而不是 Unicode，所以輸入假名仍需要倚賴櫻花輸入法。<p>
+而顯示方面，所幸 Windows 95/98/ME 可以讀取 Windows 2000/XP 版本的細明體字型，所以您必須另外更新細明體以供顯示用。礙於空間的限制，目前GDI顯示上，「日文假名」、「日文漢字」的部分您可以透過更新細明體直接看到。但是「中國簡體字」、「圈號數字」或其他部分符號，您仍需要安裝中國海字集。<p>
+相較於 Windows 2000/XP 只有一個表在掌管 BIG5 和 Unicode 間的字碼轉換，Windows 95/98/ME 高達3個表！ IE、檔案系統、GDI (視窗顯示) 各有自己的轉換表，所以工程比較龐大，我們在這一段也耽擱已久。<p>
+但是，Windows 95/98/ME 版本的 Unicode 補完計畫還是向您見面了！<p>
+除了 Windows 95/98/ME 核心是 ANSI，使轉換前、轉換後的日文檔名無法並存以外，多數的問題已可靠 Unicode 補完計畫解決。<br>
+<br>
+因為在這裡一言難盡，還有待您自己安裝來用用看:)
+<p></td></tr>
+
+</table>
+</body>
+</html>

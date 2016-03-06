@@ -1,0 +1,55 @@
+﻿<html>
+<head>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+   <title>Unicode補完計畫</title>
+   <style type="text/css">
+      BODY {font-size: 15px}
+      FONT {font-size: 15px}
+      TD {font-size: 15px}
+      A:link    { color: rgb(7,62,155) ; text-decoration: none ; cursor:hand }
+      A:visited { color: rgb(7,62,155) ; text-decoration: none }
+      A:active  { color: rgb(255,100,100) ; text-decoration: underline }
+      A:hover   { color: rgb(255,100,255) ; text-decoration: underline }
+   </style>
+</head>
+<script language=JavaScript>
+<!--
+
+var lightpic = new Array(10);
+var iconpic = new Array(10);
+for ( var i=0; i<10; i++ ) {
+	iconpic[i] = new Image();
+	iconpic[i].src = "./pic/icon" + i + ".gif";
+	lightpic[i] = new Image();
+	lightpic[i].src = "./pic/light" + i + ".gif";
+}
+
+function on(num) {
+	eval( "p = document.i" + num + ";" );
+	p.src = lightpic[num].src;
+}
+
+function off(num) {
+	eval( "p = document.i" + num + ";" );
+	p.src = iconpic[num].src;
+}
+
+//-->
+</script>
+
+<body background="./pic/left.gif" bgcolor=#FEFFC1>
+<table cellspacing=0 cellpadding=0 border=0 width=152 height=98%>
+<tr><td rowspan=10><img src='./pic/bar.gif' width=56 height=100%></td>
+    <td align=right><a target=umain href="tech.html" onmouseover='on(1);' onmouseout='off(1)'><img src="./pic/icon1.gif" name='i1' border=0 width=64 height=28></a></td></tr>
+<tr><td align=right><a target=umain href="building.html" onmouseover='on(2);' onmouseout='off(2)'><img src="./pic/icon2.gif" name='i2' border=0 width=64 height=28></a></td></tr>
+<tr><td align=right><a target=umain href="building.html" onmouseover='on(3);' onmouseout='off(3)'><img src="./pic/icon3.gif" name='i3' border=0 width=64 height=28></a></td></tr>
+<tr><td align=right><a target=umain href="building.html" onmouseover='on(4);' onmouseout='off(4)'><img src="./pic/icon4.gif" name='i4' border=0 width=64 height=28></a></td></tr>
+<tr><td align=right><a target=umain href="building.html" onmouseover='on(5);' onmouseout='off(5)'><img src="./pic/icon5.gif" name='i5' border=0 width=64 height=28></a></td></tr>
+<tr><td align=right><a target=umain href="tool.html" onmouseover='on(6);' onmouseout='off(6)'><img src="./pic/icon6.gif" name='i6' border=0 width=64 height=28></a></td></tr>
+<tr><td align=right><a target=umain href="board.html" onmouseover='on(7);' onmouseout='off(7)'><img src="./pic/icon7.gif" name='i7' border=0 width=64 height=28></a></td></tr>
+<tr><td align=right><a target=umain href="dl.html" onmouseover='on(8);' onmouseout='off(8)'><img src="./pic/icon8.gif" name='i8' border=0 width=64 height=28></a></td></tr>
+<tr><td align=right><a target=umain href="building.html" onmouseover='on(9);' onmouseout='off(9)'><img src="./pic/icon9.gif" name='i9' border=0 width=64 height=28></a></td></tr>
+<tr><td align=right><a target=umain href="ad.html" onmouseover='on(0);' onmouseout='off(0)'><img src="./pic/icon0.gif" name='i0' border=0 width=64 height=28></a></td></tr>
+</table>
+</body>
+</html>
